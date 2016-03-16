@@ -1,0 +1,9 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    <SolidColorBrush x:Key="BorderColor" Color="Gray" />
+    <SolidColorBrush x:Key="BackgroundColor" Color="LightGray" />
+    <CornerRadius x:Key="BorderRadius"
+                  BottomLeft="10"
+                  BottomRight="10"
+                  TopLeft="10"
+                  TopRight="10" />
+</ResourceDictionary>
