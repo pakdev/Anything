@@ -75,6 +75,8 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Models\IResult.cs" />
+    <Compile Include="Models\Result.cs" />
     <Compile Include="Models\Everything.cs" />
     <Compile Include="Services\EverythingService.cs" />
     <Compile Include="Services\IEverythingService.cs" />
