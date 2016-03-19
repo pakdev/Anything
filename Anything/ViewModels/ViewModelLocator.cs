@@ -9,6 +9,7 @@
   DataContext="{Binding Source={StaticResource Locator}, Path=ViewModelName}"
 */
 
+using Anything.Services;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Ioc;
 using Microsoft.Practices.ServiceLocation;
@@ -34,7 +35,8 @@ namespace Anything.ViewModels
             }
             else
             {
-                //SimpleIoc.Default.Register<IDataService, DataService>();
+                SimpleIoc.Default.Register<IPluginService, PluginService>();
+                SimpleIoc.Default.Register<IEverythingService, EverythingService>();
             }
 
             SimpleIoc.Default.Register<MainViewModel>();
