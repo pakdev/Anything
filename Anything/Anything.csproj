@@ -135,7 +135,7 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Anything.Models\Anything.Models.csproj">
+    <ProjectReference Include="..\Anything.Common\Anything.Common.csproj">
       <Project>{b7f48792-b927-437c-98b8-d8813e7a5650}</Project>
       <Name>Anything.Models</Name>
     </ProjectReference>

@@ -31,6 +31,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
+    <Reference Include="System.ComponentModel.Composition" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
@@ -42,11 +43,12 @@
   <ItemGroup>
     <Compile Include="Tester.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="TesterResult.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Anything.Models\Anything.Models.csproj">
+    <ProjectReference Include="..\Anything.Common\Anything.Common.csproj">
       <Project>{b7f48792-b927-437c-98b8-d8813e7a5650}</Project>
-      <Name>Anything.Models</Name>
+      <Name>Anything.Common</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

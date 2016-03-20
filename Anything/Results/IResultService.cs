@@ -1,12 +1,10 @@
-﻿using System;
+﻿using Anything.Common;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Anything.Results
 {
     public interface IResultService
     {
+        void UpdateResults(IEnumerable<IResult> results);
     }
 }

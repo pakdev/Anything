@@ -1,8 +1,5 @@
-﻿using Anything.Models;
-using System;
+﻿using Anything.Common;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace Anything.Services
@@ -13,6 +10,6 @@ namespace Anything.Services
 
         Task DiscoverPluginsAsync(string pluginDirectory);
 
-        Task ApplySearchToPlugins(string search);
+        Task ApplyInputToPluginsAsync(string search);
     }
 }

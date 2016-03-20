@@ -1,8 +1,6 @@
-﻿using System.Windows;
-using GalaSoft.MvvmLight;
+﻿using Anything.Properties;
 using Anything.Services;
-using Anything.Properties;
-using Anything.Results;
+using GalaSoft.MvvmLight;
 
 namespace Anything.ViewModels
 {
@@ -31,7 +29,7 @@ namespace Anything.ViewModels
                 if (Set(ref _search, value))
                 {
                     // let each plugin have a shot at getting results for the text
-                    _pluginService.ApplySearchToPlugins(value);
+                    _pluginService.ApplyInputToPluginsAsync(value);
                 }
             }
         }

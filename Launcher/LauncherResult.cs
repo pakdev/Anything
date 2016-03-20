@@ -1,29 +1,42 @@
-﻿using System.Diagnostics;
+﻿using System;
+using System.Collections.Generic;
+using System.Diagnostics;
+using System.Linq;
+using System.Text;
 using System.Threading.Tasks;
 
 namespace Anything.Models
 {
-    public class Result : IResult
+    public enum FsObjectType
+    {
+        App,
+        File,
+        Folder,
+
+    }
+
+    public class FsResult : IResult
     {
         public uint Rank { get; set; }
+
         public string Name { get; set; }
         public string Path { get; set; }
-        public ResultType Type { get; set; }
+        public FsObjectType Type { get; set; }
 
-        public static Task Open(IResult result)
+        public static Task Open(FsResult result)
         {
             ProcessStartInfo startInfo = null;
 
             switch (result.Type)
             {
-                case ResultType.App:
-                case ResultType.Folder:
+                case FsObjectType.App:
+                case FsObjectType.Folder:
                     startInfo = new ProcessStartInfo
                     {
                         FileName = result.Path
-                    };                                              
+                    };
                     break;
-                case ResultType.File:
+                case FsObjectType.File:
                     // Open an explorer window with the file selected
                     startInfo = new ProcessStartInfo
                     {
@@ -35,10 +48,10 @@ namespace Anything.Models
             var process = new Process { StartInfo = startInfo };
 
             return Task.Run(() =>
-                {
-                    process.Start();
-                    process.WaitForExit();
-                });
+            {
+                process.Start();
+                process.WaitForExit();
+            });
         }
     }
 }

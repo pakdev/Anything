@@ -46,10 +46,11 @@
     <Compile Include="AssemblyInfo.fs" />
     <Compile Include="Library1.fs" />
     <None Include="Script.fsx" />
+    <None Include="LauncherResult.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Anything.Models\Anything.Models.csproj">
-      <Name>Anything.Models</Name>
+    <ProjectReference Include="..\Anything.Models\Anything.Common.csproj">
+      <Name>Anything.Common</Name>
       <Project>{b7f48792-b927-437c-98b8-d8813e7a5650}</Project>
       <Private>True</Private>
     </ProjectReference>

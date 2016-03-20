@@ -1,5 +1,5 @@
-﻿using System.Windows;
-using Anything.ViewModels;
+﻿using Anything.ViewModels;
+using System.Windows;
 
 namespace Anything
 {

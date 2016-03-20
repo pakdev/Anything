@@ -1,19 +1,24 @@
-﻿using Anything.Models;
-using System;
+﻿using Anything.Common;
+using Anything.Results;
 using System.Collections.Generic;
 using System.ComponentModel.Composition;
 using System.ComponentModel.Composition.Hosting;
-using System.Linq;
 using System.Reflection;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace Anything.Services
 {
     public class PluginService : IPluginService
     {
+        private IResultService _resultService;
+
+        public PluginService(IResultService resultService)
+        {
+            _resultService = resultService;
+        }
+
         [ImportMany(typeof(IPlugin))]
-        public List<IPlugin> Plugins { get; }
+        public List<IPlugin> Plugins { get; private set; }
 
         public Task DiscoverPluginsAsync(string pluginDirectory)
         {
@@ -27,9 +32,15 @@ namespace Anything.Services
                 });
         }
 
-        public Task ApplySearchToPlugins(string search)
+        public Task ApplyInputToPluginsAsync(string search)
         {
-            throw new NotImplementedException();
+            return Task.Run(() =>
+                {
+                    foreach (var plugin in this.Plugins)
+                    {
+                        _resultService.UpdateResults(plugin.Process(search));
+                    }
+                });
         }
     }
 }

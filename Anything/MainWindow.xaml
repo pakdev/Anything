@@ -11,10 +11,11 @@
         Background="Transparent"
         DataContext="{Binding Main,
                               Source={StaticResource Locator}}"
-        ShowInTaskbar="False"
+        ShowInTaskbar="True"
         WindowStartupLocation="CenterScreen"
         WindowStyle="None"
         mc:Ignorable="d">
+    <!-- TODO: Make ShowInTaskbar="False" -->
     <Border Background="{StaticResource BackgroundColor}"
             BorderBrush="{StaticResource BorderColor}"
             CornerRadius="{StaticResource BorderRadius}"
