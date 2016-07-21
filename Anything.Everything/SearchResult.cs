@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Diagnostics;
 using System.IO;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 
 namespace Anything.Everything
@@ -17,6 +18,11 @@ namespace Anything.Everything
         public SearchResult(string path, SearchResultType type)
         {
             this.Name = System.IO.Path.GetFileNameWithoutExtension(path);
+            var match = Regex.Match(this.Name, @"\d+ - (.+)");
+            if (match.Success)
+            {
+                this.Name = match.Groups[1].Value;
+            }
             this.Path = path;
             this.Type = type;
             this.IconPath = path;

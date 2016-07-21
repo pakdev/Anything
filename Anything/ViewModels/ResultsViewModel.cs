@@ -3,6 +3,7 @@ using Anything.Shared;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Threading;
 using System.Collections.ObjectModel;
+using System.Diagnostics;
 using System.Linq;
 using System.Windows.Input;
 using Anything.Messages;
@@ -29,34 +30,23 @@ namespace Anything.ViewModels
             _resultService.ResultsUpdated += (sender, e) =>
             {
                 
-                DispatcherHelper.RunAsync(() =>
-                {
-                    this.SelectedIndex = 0;
-                    this.Results.Clear();
-                });
+                DispatcherHelper.RunAsync(() => this.Results.Clear());
 
                 foreach (var result in _resultService.Results)
                 {
                     DispatcherHelper.RunAsync(() => this.Results.Add(result));
                 }
 
-                DispatcherHelper.RunAsync(() =>
-                {
-                    this.SelectedIndex = 0;
-                });
+                DispatcherHelper.RunAsync(() => this.SelectedIndex = 0);
             };
 
             MessengerInstance.Register<FocusMessage<ResultsViewModel>>(this, msg =>
             {
                 this.TakeFocusCommand.Execute(null);
-                //if (msg.KeyPressed == Key.Down)
-                //{
-                //    this.SelectedIndex = 1;
-                //}
-                //else
-                //{
-                //    this.SelectedIndex = 4;
-                //}
+                if (msg.KeyPressed == Key.Enter)
+                {
+                    this.SelectedResult?.Launch.Execute(null);
+                }
             });
         }
 

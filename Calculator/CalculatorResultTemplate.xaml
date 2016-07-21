@@ -1,0 +1,9 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:local="clr-namespace:Calculator;assembly=Calculator">
+    <DataTemplate DataType="{x:Type local:CalculatorResult}">
+        <!--<Border BorderBrush="Red" BorderThickness="2">-->
+        <TextBlock Text="{Binding Result}" />
+        <!--</Border>-->
+    </DataTemplate>
+</ResourceDictionary>

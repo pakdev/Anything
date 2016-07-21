@@ -1,4 +1,4 @@
-﻿namespace AppLauncher
+﻿namespace Launcher
 
 open Anything.Shared
 open Anything.Everything
@@ -6,7 +6,7 @@ open System.Text.RegularExpressions
 open System.ComponentModel.Composition
 
 [<Export(typeof<IPlugin>)>]
-type AppLauncher() = 
+type Launcher() = 
     let everythingService = new EverythingService()
     let applications = everythingService.Applications
 

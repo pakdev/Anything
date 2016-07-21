@@ -52,6 +52,8 @@ namespace Anything.Plugins
                         finalResults = finalResults.Union(results);
                     }
                 }
+
+                // TODO: Does not work
                 //finalResults = this.Plugins
                 //    .Select(plugin => plugin.Value.Process(search))
                 //    .Aggregate(finalResults, (current, results) =>

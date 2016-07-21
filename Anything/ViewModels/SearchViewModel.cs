@@ -34,7 +34,7 @@ namespace Anything.ViewModels
             {
                 return new RelayCommand<KeyEventArgs>(e =>
                 {
-                    if (e.Key == Key.Down || e.Key == Key.Up)
+                    if (e.Key == Key.Down || e.Key == Key.Up || e.Key == Key.Enter)
                     {
                         MessengerInstance.Send(new FocusMessage<ResultsViewModel>(e.Key));
                     }
