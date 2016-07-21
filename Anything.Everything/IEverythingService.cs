@@ -1,4 +1,4 @@
-﻿namespace Anything.Services
+﻿namespace Anything.Everything
 {
     public interface IEverythingService
     {

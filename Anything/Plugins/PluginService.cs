@@ -1,46 +1,64 @@
-﻿using Anything.Common;
-using Anything.Results;
+﻿using Anything.Results;
+using Anything.Shared;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.Composition;
 using System.ComponentModel.Composition.Hosting;
+using System.Linq;
 using System.Reflection;
 using System.Threading.Tasks;
 
-namespace Anything.Services
+namespace Anything.Plugins
 {
     public class PluginService : IPluginService
     {
-        private IResultService _resultService;
+        private readonly IResultService _resultService;
 
         public PluginService(IResultService resultService)
         {
             _resultService = resultService;
         }
 
-        [ImportMany(typeof(IPlugin))]
-        public List<IPlugin> Plugins { get; private set; }
+        [ImportMany]
+        public IEnumerable<Lazy<IPlugin>> Plugins { get; set; }
+
+        [ImportMany]
+        public IEnumerable<Lazy<IPluginTemplate>> PluginTemplates { get; set; }
 
         public Task DiscoverPluginsAsync(string pluginDirectory)
         {
             return Task.Run(() =>
-                {
-                    var catalog = new AggregateCatalog(new AssemblyCatalog(Assembly.GetExecutingAssembly()),
-                        new DirectoryCatalog(pluginDirectory, "*.dll"));
+            {
+                var catalog = new AggregateCatalog(
+                    new AssemblyCatalog(Assembly.GetExecutingAssembly()),
+                    new DirectoryCatalog(pluginDirectory, "*.dll")
+                );
 
-                    var container = new CompositionContainer(catalog);
-                    container.SatisfyImportsOnce(this);
-                });
+                var container = new CompositionContainer(catalog);
+                container.SatisfyImportsOnce(this);
+            });
         }
 
         public Task ApplyInputToPluginsAsync(string search)
         {
             return Task.Run(() =>
+            {
+                IEnumerable<IResult> finalResults = new IResult[] {};
+                foreach (var plugin in this.Plugins)
                 {
-                    foreach (var plugin in this.Plugins)
+                    var results = plugin.Value.Process(search);
+                    if (results != null)
                     {
-                        _resultService.UpdateResults(plugin.Process(search));
+                        finalResults = finalResults.Union(results);
                     }
-                });
+                }
+                //finalResults = this.Plugins
+                //    .Select(plugin => plugin.Value.Process(search))
+                //    .Aggregate(finalResults, (current, results) =>
+                //        results != null ? current.Union(results) : current);
+
+                _resultService.UpdateResults(finalResults);
+            });
         }
     }
 }

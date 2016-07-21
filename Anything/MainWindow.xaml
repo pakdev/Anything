@@ -1,41 +1,35 @@
-﻿<Window x:Class="Anything.MainWindow"
-        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:vm="clr-namespace:Anything.ViewModels"
-        Title="Launch Anything"
-        Width="500"
-        Height="50"
-        AllowsTransparency="True"
-        Background="Transparent"
-        DataContext="{Binding Main,
-                              Source={StaticResource Locator}}"
-        ShowInTaskbar="True"
-        WindowStartupLocation="CenterScreen"
-        WindowStyle="None"
-        mc:Ignorable="d">
-    <!-- TODO: Make ShowInTaskbar="False" -->
-    <Border Background="{StaticResource BackgroundColor}"
+﻿<ctrls:CustomWindow x:Class="Anything.MainWindow"
+                    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:convs="clr-namespace:Anything.Views.Converters"
+                    xmlns:ctrls="clr-namespace:Anything.Views.Controls"
+                    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+                    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+                    xmlns:views="clr-namespace:Anything.Views"
+                    Title="Launch Anything"
+                    Width="500"
+                    AllowsTransparency="True"
+                    Background="Transparent"
+                    DataContext="{Binding Main,
+                                          Source={StaticResource Locator}}"
+                    ShowInTaskbar="True"
+                    SizeToContent="Height"
+                    WindowStartupLocation="CenterScreen"
+                    WindowStyle="None"
+                    mc:Ignorable="d">
+    <!--  TODO: Make ShowInTaskbar="False"  -->
+    <Border Background="{StaticResource SearchBackgroundColor}"
             BorderBrush="{StaticResource BorderColor}"
-            CornerRadius="{StaticResource BorderRadius}"
-            Opacity="0.7">
+            CornerRadius="{StaticResource TopBorderRadius}"
+            Style="{StaticResource BorderStyle}">
         <Grid>
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="Auto" />
-                <ColumnDefinition Width="*" />
-            </Grid.ColumnDefinitions>
-            <Image Source="{StaticResource Search}" />
-            <StackPanel Grid.Column="1" FocusManager.FocusedElement="{Binding ElementName=Search}">
-                <TextBox x:Name="Search"
-                         Margin="0,5,10,5"
-                         VerticalContentAlignment="Stretch"
-                         Background="{StaticResource BackgroundColor}"
-                         BorderThickness="0"
-                         FontSize="28"
-                         Text="{Binding Search,
-                                        UpdateSourceTrigger=PropertyChanged}" />
-            </StackPanel>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="50" />
+                <RowDefinition Height="{Binding ShowResults, Mode=TwoWay, Converter={convs:ShowResultsConverter}}" />
+            </Grid.RowDefinitions>
+            <views:Search Grid.Row="0" />
+            <views:Results Grid.Row="1" />
         </Grid>
     </Border>
-</Window>
+</ctrls:CustomWindow>
+

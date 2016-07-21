@@ -77,14 +77,27 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="Everything\EverythingService.cs" />
-    <Compile Include="Everything\IEverythingService.cs" />
+    <Compile Include="Messages\FocusMessage.cs" />
+    <Compile Include="Plugins\IPluginResources.cs" />
     <Compile Include="Plugins\IPluginService.cs" />
     <Compile Include="Plugins\PluginService.cs" />
     <Compile Include="Results\IResultService.cs" />
     <Compile Include="Results\ResultService.cs" />
+    <Compile Include="Results\ResultsUpdatedEventArgs.cs" />
     <Compile Include="ViewModels\MainViewModel.cs" />
+    <Compile Include="ViewModels\ResultsViewModel.cs" />
+    <Compile Include="ViewModels\SearchViewModel.cs" />
     <Compile Include="ViewModels\ViewModelLocator.cs" />
+    <Compile Include="Views\Controls\FocusableListView.cs" />
+    <Compile Include="Views\Controls\CustomWindow.cs" />
+    <Compile Include="Views\Controls\FocusableTextBox.cs" />
+    <Compile Include="Views\Converters\ShowResultsConverter.cs" />
+    <Compile Include="Views\ResultsView.xaml.cs">
+      <DependentUpon>ResultsView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\SearchView.xaml.cs">
+      <DependentUpon>SearchView.xaml</DependentUpon>
+    </Compile>
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -102,6 +115,14 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Resources\Styles.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\ResultsView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\SearchView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -135,15 +156,19 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Anything.Common\Anything.Common.csproj">
-      <Project>{b7f48792-b927-437c-98b8-d8813e7a5650}</Project>
-      <Name>Anything.Models</Name>
+    <Resource Include="Resources\Images\search.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Anything.Shared\Anything.Shared.csproj">
+      <Project>{8c9b35dc-dcdb-4579-9999-905a227d4e31}</Project>
+      <Name>Anything.Shared</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Resources\Images\search.png" />
+    <Content Include="Everything32.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
   </ItemGroup>
-  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

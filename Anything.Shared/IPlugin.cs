@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace Anything.Common
+namespace Anything.Shared
 {
     public interface IPlugin
     {

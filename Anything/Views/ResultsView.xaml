@@ -1,0 +1,56 @@
+﻿<UserControl x:Class="Anything.Views.Results"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:cmd="clr-namespace:GalaSoft.MvvmLight.Command;assembly=GalaSoft.MvvmLight.Platform"
+             xmlns:ctrls="clr-namespace:Anything.Views.Controls"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:i="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity"
+             xmlns:ignore="http://www.galasoft.ch/ignore"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             d:DesignHeight="100"
+             d:DesignWidth="600"
+             DataContext="{Binding Results,
+                                   Source={StaticResource Locator}}"
+             mc:Ignorable="d ignore">
+    <UserControl.Resources>
+        <Style TargetType="{x:Type ListViewItem}">
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="ListViewItem">
+                        <Border Name="Border"
+                                Padding="2"
+                                SnapsToDevicePixels="True">
+                            <ContentPresenter />
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsSelected" Value="True">
+                                <Setter TargetName="Border" Property="Background" Value="{DynamicResource {x:Static SystemColors.HighlightBrushKey}}" />
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+    </UserControl.Resources>
+    <Border Background="{StaticResource ResultBackgroundColor}"
+            BorderBrush="{StaticResource BorderColor}"
+            CornerRadius="{StaticResource BottomBorderRadius}"
+            Padding="0 0 0 10"
+            Style="{StaticResource BorderStyle}">
+        <ctrls:FocusableListView FocusCommand="{Binding TakeFocusCommand,
+                                                        Mode=OneWayToSource}"
+                                 ItemsSource="{Binding Results,
+                                                       Mode=OneTime}"
+                                 SelectedIndex="{Binding SelectedIndex}"
+                                 SelectedItem="{Binding SelectedResult,
+                                                        Mode=OneWayToSource}"
+                                 SelectionMode="Single"
+                                 Style="{StaticResource ResultsStyle}">
+            <i:Interaction.Triggers>
+                <i:EventTrigger EventName="PreviewKeyDown">
+                    <cmd:EventToCommand Command="{Binding KeyDownCommand, Mode=OneTime}" PassEventArgsToCommand="True" />
+                </i:EventTrigger>
+            </i:Interaction.Triggers>
+        </ctrls:FocusableListView>
+    </Border>
+</UserControl>

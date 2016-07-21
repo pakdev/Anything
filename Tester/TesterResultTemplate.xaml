@@ -1,0 +1,10 @@
+﻿<ResourceDictionary x:Class="Tester.TesterResultTemplate"
+                    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:local="clr-namespace:Tester">
+    <DataTemplate DataType="{x:Type local:TesterResult}">
+        <Border BorderBrush="Red" BorderThickness="1">
+            <TextBlock Text="{Binding Value, Mode=OneWay}" />
+        </Border>
+    </DataTemplate>
+</ResourceDictionary>

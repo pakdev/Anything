@@ -9,8 +9,8 @@
   DataContext="{Binding Source={StaticResource Locator}, Path=ViewModelName}"
 */
 
+using Anything.Plugins;
 using Anything.Results;
-using Anything.Services;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Ioc;
 using Microsoft.Practices.ServiceLocation;
@@ -38,19 +38,27 @@ namespace Anything.ViewModels
             {
                 SimpleIoc.Default.Register<IResultService, ResultService>();
                 SimpleIoc.Default.Register<IPluginService, PluginService>();
-                SimpleIoc.Default.Register<IEverythingService, EverythingService>();
             }
 
             SimpleIoc.Default.Register<MainViewModel>();
+            SimpleIoc.Default.Register<SearchViewModel>();
+            SimpleIoc.Default.Register<ResultsViewModel>();
         }
 
-        /// <summary>
-        /// Gets the Main property.
-        /// </summary>
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Performance",
             "CA1822:MarkMembersAsStatic",
             Justification = "This non-static member is needed for data binding purposes.")]
         public MainViewModel Main => ServiceLocator.Current.GetInstance<MainViewModel>();
+
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Performance",
+            "CA1822:MarkMembersAsStatic",
+            Justification = "This non-static member is needed for data binding purposes.")]
+        public SearchViewModel Search => ServiceLocator.Current.GetInstance<SearchViewModel>();
+
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Performance",
+            "CA1822:MarkMembersAsStatic",
+            Justification = "This non-static member is needed for data binding purposes.")]
+        public ResultsViewModel Results => ServiceLocator.Current.GetInstance<ResultsViewModel>();
 
         /// <summary>
         /// Cleans up all the resources.

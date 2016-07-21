@@ -1,12 +1,15 @@
-﻿using Anything.Common;
+﻿using Anything.Shared;
+using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
-namespace Anything.Services
+namespace Anything.Plugins
 {
     public interface IPluginService
     {
-        List<IPlugin> Plugins { get; }
+        IEnumerable<Lazy<IPlugin>> Plugins { get; }
+
+        IEnumerable<Lazy<IPluginTemplate>> PluginTemplates { get; }
 
         Task DiscoverPluginsAsync(string pluginDirectory);
 

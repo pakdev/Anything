@@ -1,9 +1,27 @@
 ﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
     <SolidColorBrush x:Key="BorderColor" Color="Gray" />
-    <SolidColorBrush x:Key="BackgroundColor" Color="LightGray" />
-    <CornerRadius x:Key="BorderRadius"
+
+    <SolidColorBrush x:Key="SearchBackgroundColor" Color="LightGray" />
+    <SolidColorBrush x:Key="ResultBackgroundColor" Color="#E1E1E1" />
+
+    <CornerRadius x:Key="TopBorderRadius"
                   BottomLeft="10"
                   BottomRight="10"
                   TopLeft="10"
                   TopRight="10" />
+    <CornerRadius x:Key="BottomBorderRadius"
+                  BottomLeft="10"
+                  BottomRight="10"
+                  TopLeft="0"
+                  TopRight="0" />
+
+    <Style x:Key="ResultsStyle" TargetType="{x:Type ListView}">
+        <Setter Property="Opacity" Value="0.9" />
+        <Setter Property="BorderBrush" Value="Transparent" />
+        <Setter Property="Background" Value="{StaticResource ResultBackgroundColor}" />
+    </Style>
+
+    <Style x:Key="BorderStyle" TargetType="{x:Type Border}">
+        <Setter Property="Opacity" Value="0.9" />
+    </Style>
 </ResourceDictionary>

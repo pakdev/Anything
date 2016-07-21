@@ -2,19 +2,10 @@
 using System.Runtime.InteropServices;
 using System.Text;
 
-namespace Anything.Models
+namespace Anything.Everything
 {
-    static class Everything
+    internal static class SafeNativeMethods
     {
-        const int EVERYTHING_OK = 0;
-        const int EVERYTHING_ERROR_MEMORY = 1;
-        const int EVERYTHING_ERROR_IPC = 2;
-        const int EVERYTHING_ERROR_REGISTERCLASSEX = 3;
-        const int EVERYTHING_ERROR_CREATEWINDOW = 4;
-        const int EVERYTHING_ERROR_CREATETHREAD = 5;
-        const int EVERYTHING_ERROR_INVALIDINDEX = 6;
-        const int EVERYTHING_ERROR_INVALIDCALL = 7;
-
         [DllImport("Everything32.dll", CharSet = CharSet.Unicode)]
         public static extern int Everything_SetSearchW(string lpSearchString);
         [DllImport("Everything32.dll")]

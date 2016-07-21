@@ -1,5 +1,6 @@
-﻿using Anything.Properties;
-using Anything.Services;
+﻿using Anything.Plugins;
+using Anything.Properties;
+using Anything.Results;
 using GalaSoft.MvvmLight;
 
 namespace Anything.ViewModels
@@ -12,26 +13,27 @@ namespace Anything.ViewModels
     /// </summary>
     public class MainViewModel : ViewModelBase
     {
-        private IPluginService _pluginService;
-
-        public MainViewModel(IPluginService pluginService)
+        public MainViewModel(IPluginService pluginService, IResultService resultService)
         {
-            _pluginService = pluginService;
-            _pluginService.DiscoverPluginsAsync(Settings.Default.PluginDirectory);
+            pluginService.DiscoverPluginsAsync(Settings.Default.PluginDirectory).ContinueWith(task =>
+            {
+                foreach (var pluginTemplate in pluginService.PluginTemplates)
+                {
+                    pluginTemplate.Value.AddToMergedDictionaries();
+                }
+            });
+
+            resultService.ResultsUpdated += (sender, e) =>
+            {
+                this.ShowResults = e.NumResults > 0;
+            };
         }
 
-        private string _search;
-        public string Search
+        private bool _showResults;
+        public bool ShowResults
         {
-            get { return _search; }
-            set
-            {
-                if (Set(ref _search, value))
-                {
-                    // let each plugin have a shot at getting results for the text
-                    _pluginService.ApplyInputToPluginsAsync(value);
-                }
-            }
+            get { return _showResults; }
+            set { Set(ref _showResults, value); }
         }
     }
 }
