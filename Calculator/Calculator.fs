@@ -7,6 +7,6 @@ open System.ComponentModel.Composition
 type Calculator() =
     interface IPlugin with
         member this.Process input =
-            if input.Contains("+") 
+            if input.StartsWith("=")
                 then Seq.singleton(new CalculatorResult(1u, Result = 5.5) :> IResult) 
                 else Seq.empty

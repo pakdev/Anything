@@ -1,13 +1,10 @@
 ﻿namespace Calculator
 
 open Anything.Shared
-open System
 open System.IO
 open System.Xml
-open System.Xaml
 open System.Windows
 open System.Windows.Markup
-open System.Windows.Baml2006
 open System.ComponentModel.Composition
 
 [<Export(typeof<IPluginTemplate>)>]
